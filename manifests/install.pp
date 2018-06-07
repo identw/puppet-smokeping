@@ -1,7 +1,14 @@
 class smokeping::install {
 
-  package { 'smokeping':
-    ensure => $smokeping::version,
+  if $smokeping::params::install_options {
+    package { 'smokeping':
+      ensure          => $smokeping::version,
+      install_options => $smokeping::params::install_options,
+    }
+  } else {
+    package { 'smokeping':
+      ensure          => $smokeping::version,
+    }
   }
 
   if ! defined (Package['fping']) {

@@ -66,6 +66,12 @@ class smokeping::params {
       $webserver_group    = 'www-data'
 
       $package_perldoc    = 'perl-doc'
+      if $manage_apache {
+        $install_options    = false
+      } else {
+        $install_options    = ['--no-install-recommends']
+      }
+
 
     } elsif $::osfamily == 'RedHat' or $::operatingsystem == 'amazon' {
 
@@ -92,6 +98,7 @@ class smokeping::params {
       $webserver_group    = 'apache'
 
       $package_perldoc    = 'perl-Pod-Perldoc'
+      $install_options    = false
     }
 
 
