@@ -3,8 +3,11 @@
 # [*slave*]
 #   Location of slave
 #
+# [*slave_name*]
+#   Name of the slave for config files
+#
 # [*display_name*]
-#   Name of the slave
+#  The name of the slave server that will be displayed in the web interface
 #
 # [*color*]
 #   Color of this slave
@@ -31,7 +34,7 @@ define smokeping::slave(
       mode    => '0600',
       owner   => $smokeping::daemon_user,
       group   => $smokeping::daemon_group,
-      content => "${random_value}",
+      content => $random_value,
   }
   @@concat::fragment { "${slave_name}-secret":
       target  => $smokeping::slave_secrets,
